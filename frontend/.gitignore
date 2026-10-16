@@ -1,23 +1,7 @@
-# Node
-node_modules/
-dist/
-.angular/
+/node_modules
+/dist
+/.angular
+/coverage
 *.log
-
-# Java
-target/
-*.class
-.mvn/wrapper/maven-wrapper.jar
-
-# IDE
 .idea/
 .vscode/
-*.iml
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Env
-.env
-.env.local
