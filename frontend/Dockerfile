@@ -1,0 +1,19 @@
+FROM node:22-alpine AS build
+WORKDIR /app
+
+# Copiar solo package.json primero (mejor caché)
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Copiar código y compilar
+COPY . .
+RUN npm run build -- --configuration production
+
+
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
