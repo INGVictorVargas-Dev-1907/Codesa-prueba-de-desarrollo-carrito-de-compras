@@ -1,4 +1,5 @@
 services:
+  # Base de datos PostgreSQL
   db:
     image: postgres:16-alpine
     container_name: codesa-db
@@ -16,6 +17,48 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  # Backend Java Spring Boot
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: codesa-backend
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/codesa_shop
+      SPRING_DATASOURCE_USERNAME: codesa
+      SPRING_DATASOURCE_PASSWORD: codesa123
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--spider",
+          "-q",
+          "http://localhost:8080/api/categories"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+
+  # Frontend Angular servido con Nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: codesa-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
 
 volumes:
   codesa_pgdata:
