@@ -74,7 +74,7 @@ import { ToastModule } from 'primeng/toast';
                 <div class="line-actions">
                   <p-inputNumber
                     [ngModel]="line.quantity"
-                    (onInput)="updateQty(line.product.id, $event.value)"
+                    (onInput)="updateQty(line.product.id, $event.value ?? 1)"
                     [min]="1"
                     [max]="maxQty(line.product.stock)"
                     [showButtons]="true"

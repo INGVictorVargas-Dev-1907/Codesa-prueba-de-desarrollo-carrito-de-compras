@@ -23,6 +23,16 @@ export const routes: Routes = [
         title: 'Tu carrito - Codesa Shop'
       },
       {
+        path: 'checkout',
+        loadComponent: () => import('./features/checkout/checkout-page/checkout-page.component').then(m => m.CheckoutPageComponent),
+        title: 'Checkout - Codesa Shop'
+      },
+      {
+        path: 'pedido/:numero',
+        loadComponent: () => import('./features/checkout/order-confirmation/order-confirmation.component').then(m => m.OrderConfirmationComponent),
+        title: 'Confirmación de pedido - Codesa Shop'
+      },
+      {
         path: '**',
         loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
         title: 'No encontrado - Codesa Shop'

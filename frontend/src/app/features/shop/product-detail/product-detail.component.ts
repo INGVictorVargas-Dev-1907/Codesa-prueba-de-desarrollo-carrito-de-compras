@@ -39,7 +39,7 @@ import { CartStore } from '../../cart/cart.store';
           <h1 class="title">{{ product()!.name }}</h1>
           
           <div class="rating-row">
-            <p-rating [ngModel]="product()!.rating" [readonly]="true" [cancel]="false" />
+            <p-rating [ngModel]="product()!.rating" [readonly]="true"/>
             <span class="rating-text">{{ product()!.rating }} ({{ product()!.stock }} disponibles)</span>
           </div>
 

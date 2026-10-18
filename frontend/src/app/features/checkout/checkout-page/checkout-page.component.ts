@@ -32,7 +32,7 @@ const DRAFT_KEY = 'codesa_checkout_draft';
     </div>
 
     <div class="checkout-layout">
-      <!-- FORMULARIO IZQUIERDA -->
+      <!-- Formulario izquierda -->
       <div class="checkout-form-container">
         <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
           
@@ -117,7 +117,7 @@ const DRAFT_KEY = 'codesa_checkout_draft';
         </form>
       </div>
 
-      <!-- RESUMEN DERECHA -->
+      <!-- Resumen en la derecha -->
       <div class="checkout-summary">
         <h2>Tu pedido</h2>
         <div class="summary-lines">
