@@ -45,7 +45,10 @@ export const appConfig: ApplicationConfig = {
     // Tema visual de PrimeNG
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark-mode'
+        }
       }
     })
   ]

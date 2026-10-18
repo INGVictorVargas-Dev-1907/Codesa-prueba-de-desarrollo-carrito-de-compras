@@ -117,13 +117,13 @@ export class CartStore {
   removeLine(productId: number): void {
     const previous = this._lines();
     this._lines.update(lines => lines.filter(l => l.product.id !== productId));
-
-    // Configurar la función de deshacer
+    
+    // Guardamos el estado anterior para el Deshacer
     this._undoAction.set({
       label: 'Producto eliminado',
       restore: () => this._lines.set(previous)
     });
-
+    
     this.checkCouponValidity();
   }
 
@@ -132,7 +132,8 @@ export class CartStore {
     const previousCoupon = this._coupon();
     this._lines.set([]);
     this._coupon.set(null);
-
+    
+    // Guardamos el estado anterior para el Deshacer
     this._undoAction.set({
       label: 'Carrito vaciado',
       restore: () => {
@@ -142,16 +143,17 @@ export class CartStore {
     });
   }
 
+  // Método para limpiar la acción de deshacer (cuando expira el toast)
+  clearUndo(): void {
+    this._undoAction.set(null);
+  }
+
   applyCoupon(coupon: Coupon): void {
     this._coupon.set(coupon);
   }
 
   removeCoupon(): void {
     this._coupon.set(null);
-  }
-
-  clearUndo(): void {
-    this._undoAction.set(null);
   }
 
   private checkCouponValidity(): void {
